@@ -6,3 +6,6 @@ Comparsion is in three metric spaces: Gromov-Frechet, Hausdorf and Gromov-Hausdo
 on those three metrics.
 
 ***We don't know will be the results of our work in use but we do it!*** Because, do the master's work never late!
+
+# For conributors. How to work
+Clone the project from ***master*** branch. Create your method in **Distance** class. Then, push your changes to the branch with *your_metric_name*. After that - make a *pull request* to the ***testing*** branch.
