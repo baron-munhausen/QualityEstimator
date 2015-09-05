@@ -8,8 +8,8 @@ import java.awt.image.DataBufferByte;
 public class ImageConverter {
 
     /*
-        Перетворює Mat зображення в BufferedImage
-        для того, щоб його можна було показати в JFrame
+        РџРµСЂРµС‚РІРѕСЂСЋС” Mat Р·РѕР±СЂР°Р¶РµРЅРЅСЏ РІ BufferedImage
+        РґР»СЏ С‚РѕРіРѕ, С‰РѕР± Р№РѕРіРѕ РјРѕР¶РЅР° Р±СѓР»Рѕ РїРѕРєР°Р·Р°С‚Рё РІ JFrame
      */
     public static BufferedImage Mat2BufferedImage(Mat m){
         int type = BufferedImage.TYPE_BYTE_GRAY;

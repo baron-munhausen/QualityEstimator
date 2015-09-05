@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *  Методи для прорідження контура
+ *  РњРµС‚РѕРґРё РґР»СЏ РїСЂРѕСЂС–РґР¶РµРЅРЅСЏ РєРѕРЅС‚СѓСЂР°
  */
 public class PolySimplifier {
 
-    // викидає точки з масиву з певним кроком
+    // РІРёРєРёРґР°С” С‚РѕС‡РєРё Р· РјР°СЃРёРІСѓ Р· РїРµРІРЅРёРј РєСЂРѕРєРѕРј
     public static MatOfPoint reduceSimple(MatOfPoint mop, int step){
         List<Point> pointList = mop.toList();
         List<Point> tempPointList = new ArrayList<>();
@@ -26,9 +26,9 @@ public class PolySimplifier {
         return simplifiedMop;
     }
 
-    /* алгоритм Дугласа-Рамера-Паркера
-        step - кількість точок, для одного проходу (чим більше тим сильніше спрощення)
-        epsilon - максимальна довжина відхилення від перпендикуляра (чим більше тим менше спрощення)
+    /* Р°Р»РіРѕСЂРёС‚Рј Р”СѓРіР»Р°СЃР°-Р Р°РјРµСЂР°-РџР°СЂРєРµСЂР°
+        step - РєС–Р»СЊРєС–СЃС‚СЊ С‚РѕС‡РѕРє, РґР»СЏ РѕРґРЅРѕРіРѕ РїСЂРѕС…РѕРґСѓ (С‡РёРј Р±С–Р»СЊС€Рµ С‚РёРј СЃРёР»СЊРЅС–С€Рµ СЃРїСЂРѕС‰РµРЅРЅСЏ)
+        epsilon - РјР°РєСЃРёРјР°Р»СЊРЅР° РґРѕРІР¶РёРЅР° РІС–РґС…РёР»РµРЅРЅСЏ РІС–Рґ РїРµСЂРїРµРЅРґРёРєСѓР»СЏСЂР° (С‡РёРј Р±С–Р»СЊС€Рµ С‚РёРј РјРµРЅС€Рµ СЃРїСЂРѕС‰РµРЅРЅСЏ)
      */
     public static MatOfPoint reduceRDP(MatOfPoint mop, int step ,double epsilon){
         List<Point> pointList = mop.toList();

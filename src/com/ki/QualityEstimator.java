@@ -24,9 +24,9 @@ public class QualityEstimator {
         List<MatOfPoint> contours = new ArrayList<>();
         Mat imgBinary = new Mat();
 
-        // перетворюємо в сіре
+        // РїРµСЂРµС‚РІРѕСЂСЋС”РјРѕ РІ СЃС–СЂРµ
         Imgproc.cvtColor(img, img, Imgproc.COLOR_RGB2GRAY);
-        // конвертуємо вхідне зображення в бінарне
+        // РєРѕРЅРІРµСЂС‚СѓС”РјРѕ РІС…С–РґРЅРµ Р·РѕР±СЂР°Р¶РµРЅРЅСЏ РІ Р±С–РЅР°СЂРЅРµ
         Imgproc.threshold(img, imgBinary, -1, 255, Imgproc.THRESH_BINARY_INV + Imgproc.THRESH_OTSU);
 
         GUI.displayImage(ImageConverter.Mat2BufferedImage(imgBinary), "Binary image");
@@ -35,12 +35,12 @@ public class QualityEstimator {
 
 
         for(int i=0; i < contours.size(); i++){
-            // створюємо поверхню для 1 контура
+            // СЃС‚РІРѕСЂСЋС”РјРѕ РїРѕРІРµСЂС…РЅСЋ РґР»СЏ 1 РєРѕРЅС‚СѓСЂР°
             Mat imgContour = new Mat(img.height(), img.width(), CvType.CV_8UC3);
-            // малюємо контур на поверхні
+            // РјР°Р»СЋС”РјРѕ РєРѕРЅС‚СѓСЂ РЅР° РїРѕРІРµСЂС…РЅС–
             Imgproc.drawContours(imgContour, contours, i, new Scalar(20, 150, 0), 1);
             printContourInfo(contours.get(i), "#" + i);
-            // виводимо на екран
+            // РІРёРІРѕРґРёРјРѕ РЅР° РµРєСЂР°РЅ
             GUI.displayImage(ImageConverter.Mat2BufferedImage(imgContour), "Contour #" + i);
 
             Mat imgSimpContour = new Mat(img.height(), img.width(), CvType.CV_8UC3);
@@ -55,12 +55,12 @@ public class QualityEstimator {
         System.out.println("contour " + name);
         System.out.println("num of points = " + pointList.size() + " \n");
 
-        /* в pointList точки знаходяться в наступному порядку
-        приклад:
+        /* РІ pointList С‚РѕС‡РєРё Р·РЅР°С…РѕРґСЏС‚СЊСЃСЏ РІ РЅР°СЃС‚СѓРїРЅРѕРјСѓ РїРѕСЂСЏРґРєСѓ
+        РїСЂРёРєР»Р°Рґ:
                 1 8 7
                 2   6
                 3 4 5
-        перша точка завжди найближча до лівого верхнього краю зображення
+        РїРµСЂС€Р° С‚РѕС‡РєР° Р·Р°РІР¶РґРё РЅР°Р№Р±Р»РёР¶С‡Р° РґРѕ Р»С–РІРѕРіРѕ РІРµСЂС…РЅСЊРѕРіРѕ РєСЂР°СЋ Р·РѕР±СЂР°Р¶РµРЅРЅСЏ
          */
 
         if(pointList.size() < 10){
