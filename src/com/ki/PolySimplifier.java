@@ -2,8 +2,10 @@ package com.ki;
 
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.Point;
+import sun.java2d.pipe.AAShapePipe;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -77,6 +79,51 @@ public class PolySimplifier {
             outputPointList.add(inputPointList.get(endSegIndex));
         }
 
+        return outputPointList;
+    }
+
+    /*
+        Алгоритм Visvalingam-Whyatt
+        numberToKeep - кількість точок у вихідній ламаній
+     */
+    public static List<Point> reduceVW(List<Point> inputPointList, int numberToKeep){
+        int numberToRemove = inputPointList.size() - numberToKeep;
+        ArrayList<Point> outputPointList = new ArrayList<>(inputPointList);
+
+        // якщо кількість точок для видалення <= 0, то повертаємо вхідну ламану
+        if(numberToRemove <= 0){
+            return outputPointList;
+        }
+
+        // якщо кількість точок у ламній менше 3, повертаємо вхідну ламану
+        if(outputPointList.size() <= 3){
+            return outputPointList;
+        }
+
+        // видаляэмо вказану кількість точок
+        for(int i=0; i < numberToRemove; i++){
+
+            int minIndex = 0;           // ідекс точки для якої площо трикутника найменша
+            double minArea = GeometryUtils.getTriangleArea(outputPointList.get(0),
+                    outputPointList.get(1), outputPointList.get(2));
+
+            // шукаємо точку з найменшою площою
+            // після видалення точки, потрібно знову перераховувати площі для кожної точки ламаної
+            for(int j=2; j < outputPointList.size() - 1; j++){
+                //обчилюємо площі для всі наступних точок в ламаній
+                double area = GeometryUtils.getTriangleArea(outputPointList.get(j-1),
+                        outputPointList.get(j),outputPointList.get(j+1));
+
+                if(area < minArea){
+                    minIndex = j;
+                    minArea = area;
+                }
+            }
+            // видаляємо точку для якої площа найменша
+            outputPointList.remove(minIndex);
+        }
+
+        System.out.println("VW reduce. num of points = " + outputPointList.size());
         return outputPointList;
     }
 }
